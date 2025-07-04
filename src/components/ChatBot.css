@@ -174,9 +174,16 @@
   color: white;
 }
 
+/* 라이트모드: 비활성화 모델 글씨를 연한 회색으로 */
 .model-item.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  color: #b0b0b0 !important;
+  background: var(--bg-tertiary);
+}
+
+/* 다크모드: 비활성화 모델 글씨를 밝은 회색으로 */
+body.dark .model-item.disabled {
+  color: #cccccc !important;
+  background: var(--bg-tertiary);
 }
 
 .model-info {
