@@ -1,18 +1,11 @@
-// AI API 서비스
-// 현재는 간단한 응답 로직을 사용하지만, 실제 AI API로 쉽게 교체할 수 있습니다
-
 export interface AIResponse {
   text: string;
   confidence?: number;
 }
 
-// Hugging Face API를 사용하는 예시 (무료)
 export const callHuggingFaceAPI = async (
   message: string
 ): Promise<AIResponse> => {
-  // 실제 사용시에는 Hugging Face API 키가 필요합니다
-  // https://huggingface.co/settings/tokens 에서 무료로 발급 가능
-
   const API_URL =
     "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill";
   const API_KEY = process.env.REACT_APP_HUGGINGFACE_API_KEY; // .env 파일에 저장
@@ -48,11 +41,7 @@ export const callHuggingFaceAPI = async (
   }
 };
 
-// OpenAI API를 사용하는 예시 (무료 크레딧 제공)
 export const callOpenAIAPI = async (message: string): Promise<AIResponse> => {
-  // 실제 사용시에는 OpenAI API 키가 필요합니다
-  // https://platform.openai.com/api-keys 에서 발급 가능 (무료 크레딧 제공)
-
   const API_URL = "https://api.openai.com/v1/chat/completions";
   const API_KEY = process.env.REACT_APP_OPENAI_API_KEY; // .env 파일에 저장
 
@@ -133,7 +122,6 @@ export const generateSimpleResponse = async (
     selectedResponse = responses[Math.floor(Math.random() * responses.length)]; // 랜덤 응답
   }
 
-  // 약간의 지연을 추가해서 실제 AI 응답처럼 보이게 함
   await new Promise((resolve) =>
     setTimeout(resolve, 500 + Math.random() * 1000)
   );
@@ -144,7 +132,6 @@ export const generateSimpleResponse = async (
   };
 };
 
-// 기본 AI 서비스 (현재는 간단한 응답 사용)
 export const generateAIResponse = async (
   message: string,
   modelId: string = "simple"

@@ -30,7 +30,7 @@ export const useSpeechRecognition = (): UseSpeechRecognitionReturn => {
 
     recognition.continuous = true;
     recognition.interimResults = true;
-    recognition.lang = "ko-KR"; // 한국어 설정
+    recognition.lang = "ko-KR";
 
     return recognition;
   }, [isSupported]);

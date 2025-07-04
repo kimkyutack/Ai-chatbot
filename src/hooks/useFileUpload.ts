@@ -17,7 +17,7 @@ interface UseFileUploadReturn {
   isUploading: boolean;
 }
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_FILE_SIZE = 10 * 1024 * 1024;
 const ALLOWED_TYPES = [
   "image/jpeg",
   "image/png",
@@ -34,12 +34,10 @@ export const useFileUpload = (): UseFileUploadReturn => {
   const [isUploading, setIsUploading] = useState(false);
 
   const uploadFile = useCallback(async (file: File): Promise<UploadedFile> => {
-    // 파일 크기 검증
     if (file.size > MAX_FILE_SIZE) {
       throw new Error("파일 크기가 10MB를 초과합니다.");
     }
 
-    // 파일 타입 검증
     if (!ALLOWED_TYPES.includes(file.type)) {
       throw new Error("지원하지 않는 파일 형식입니다.");
     }
@@ -47,7 +45,6 @@ export const useFileUpload = (): UseFileUploadReturn => {
     setIsUploading(true);
 
     try {
-      // 파일을 Data URL로 변환
       const url = await new Promise<string>((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => resolve(reader.result as string);
