@@ -100,7 +100,6 @@ export const callOpenAIAPI = async (message: string): Promise<AIResponse> => {
   }
 };
 
-// 현재 사용 중인 간단한 응답 로직
 export const generateSimpleResponse = async (
   message: string
 ): Promise<AIResponse> => {
@@ -147,11 +146,16 @@ export const generateSimpleResponse = async (
 
 // 기본 AI 서비스 (현재는 간단한 응답 사용)
 export const generateAIResponse = async (
-  message: string
+  message: string,
+  modelId: string = "simple"
 ): Promise<AIResponse> => {
-  return generateSimpleResponse(message);
-
-  // 실제 AI API를 사용하려면 아래 주석을 해제하고 위의 return을 주석 처리하세요
-  // return callHuggingFaceAPI(message);
-  // return callOpenAIAPI(message);
+  switch (modelId) {
+    case "huggingface":
+      return callHuggingFaceAPI(message);
+    case "openai":
+      return callOpenAIAPI(message);
+    case "simple":
+    default:
+      return generateSimpleResponse(message);
+  }
 };
